@@ -1,12 +1,12 @@
-import kr.co.taek.dev.build.JDK_VERSION
-import kr.co.taek.dev.build.libs
+import artinus.backend.assignment.build.JDK_VERSION
+import artinus.backend.assignment.build.libs
 
 plugins {
     kotlin("jvm")
     id("org.jlleitschuh.gradle.ktlint")
 }
 
-group = "kr.co.taek.dev"
+group = "artinus.backend.assignment"
 
 java {
     toolchain {

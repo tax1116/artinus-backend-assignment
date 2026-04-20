@@ -1,4 +1,4 @@
-import kr.co.taek.dev.build.libs
+import artinus.backend.assignment.build.libs
 
 plugins {
     id("global-convention")

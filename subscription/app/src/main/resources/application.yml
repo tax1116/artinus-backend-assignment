@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: artinus-subscription
+  datasource:
+    url: jdbc:h2:mem:artinus;DB_CLOSE_DELAY=-1;MODE=LEGACY
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+  sql:
+    init:
+      mode: always
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+server:
+  port: 8080
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+csrng:
+  base-url: ${CSRNG_BASE_URL:https://csrng.net}
+  bypass-on-outage: ${CSRNG_BYPASS_ON_OUTAGE:false}
+
+llm:
+  provider: ${LLM_PROVIDER:ANTHROPIC}
+  api-key: ${ANTHROPIC_API_KEY:}
+  model: ${ANTHROPIC_MODEL:claude-haiku-4-5-20251001}
+  base-url: ${ANTHROPIC_BASE_URL:https://api.anthropic.com}
+
+logging:
+  pattern:
+    level: "%5p [%X{traceId:-},%X{spanId:-}]"
+  level:
+    root: INFO
+    artinus.backend.assignment.subscription: DEBUG
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:artinus-test;DB_CLOSE_DELAY=-1
